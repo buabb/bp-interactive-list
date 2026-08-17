@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Interactive Boys Planet trainee reveal map and Top 11 episode tracker." />
+  <title>Boys Planet — Where Are They Now?</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="planet-mark" aria-hidden="true">✦</div>
+    <div>
+      <p class="eyebrow">STAR CREATOR ARCHIVE</p>
+      <h1>BOYS PLANET</h1>
+      <p class="subtitle">Where are they now? + your episode-by-episode Top 11</p>
+    </div>
+    <div class="progress-wrap" aria-label="Reveal progress">
+      <strong id="progressText">0 / 98</strong>
+      <div class="progress-track"><span id="progressBar"></span></div>
+      <small>trainees revealed</small>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Main sections">
+    <button class="tab active" data-tab="map">Career Map</button>
+    <button class="tab" data-tab="picks">My Top 11</button>
+  </nav>
+
+  <main>
+    <section id="mapTab" class="tab-panel active">
+      <div class="toolbar panel">
+        <div class="toolbar-group">
+          <button id="toggleNames" class="control primary" aria-pressed="false">Show trainee names</button>
+          <button id="shuffleNames" class="control">Shuffle names</button>
+        </div>
+        <div class="toolbar-group rounds" aria-label="Reveal by elimination round">
+          <span>Reveal:</span>
+          <button class="control reveal-round" data-round="first">Elimination 1</button>
+          <button class="control reveal-round" data-round="second">Elimination 2</button>
+          <button class="control reveal-round" data-round="third">Elimination 3</button>
+          <button class="control reveal-round" data-round="finale">Finale</button>
+          <button class="control reveal-round" data-round="debut">Debut 9</button>
+        </div>
+        <button id="resetReveals" class="control danger">Reset reveals</button>
+      </div>
+
+      <div class="map-layout">
+        <aside class="contestant-panel panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">GUESSING POOL</p>
+              <h2>Contestants</h2>
+            </div>
+            <span id="remainingCount" class="badge">98 left</span>
+          </div>
+          <p class="hint">Turn names on when you are ready. Click a name to reveal their current destination.</p>
+          <input id="mapSearch" class="search map-search" type="search" placeholder="Search contestant…" aria-label="Search contestants" />
+          <div id="contestantPool" class="contestant-pool"></div>
+        </aside>
+
+        <section class="career-area">
+          <div class="origin panel">
+            <div class="mini-logo">BOYS<br>PLANET</div>
+            <div>
+              <p class="eyebrow">2023 → 2026</p>
+              <h2>Current destinations</h2>
+              <p>Each trainee appears once, under their current group or status. Reveal a trainee to unlock their card.</p>
+            </div>
+          </div>
+          <div id="destinationGrid" class="destination-grid"></div>
+        </section>
+      </div>
+    </section>
+
+    <section id="picksTab" class="tab-panel">
+      <div class="picks-header panel">
+        <div>
+          <p class="eyebrow">WATCH-ALONG TRACKER</p>
+          <h2>My Top 11</h2>
+          <p class="hint">Slots 1–9 are your debut lineup. Slots 10–11 are your two potential debut picks.</p>
+        </div>
+        <div class="episode-control">
+          <label for="episodeSelect">Episode</label>
+          <select id="episodeSelect"></select>
+          <button id="copyPrevious" class="control">Copy previous episode</button>
+        </div>
+      </div>
+
+      <div class="prediction-layout">
+        <section class="ranking-board panel">
+          <div class="ranking-title debut-title"><span>DEBUT</span><small>9 positions</small></div>
+          <div id="debutSlots" class="slots"></div>
+          <div class="ranking-title potential-title"><span>POTENTIAL DEBUT</span><small>2 positions</small></div>
+          <div id="potentialSlots" class="slots"></div>
+        </section>
+
+        <aside class="picker panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">TRAINEE POOL</p>
+              <h2>Choose your picks</h2>
+            </div>
+            <input id="pickSearch" class="search" type="search" placeholder="Search trainee…" />
+          </div>
+          <p class="hint">Drag a trainee into a slot, or click a trainee and then click a slot. Drag occupied slots to reorder.</p>
+          <div class="picker-controls">
+            <label class="switch-line"><input id="hideEliminated" type="checkbox" checked /> Hide trainees eliminated before this episode</label>
+            <button id="clearEpisode" class="control danger">Clear this episode</button>
+          </div>
+          <div id="pickPool" class="pick-pool"></div>
+        </aside>
+      </div>
+
+      <section class="history panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">YOUR HISTORY</p>
+            <h2>Episode snapshots</h2>
+          </div>
+          <button id="exportPicks" class="control primary">Copy current Top 11</button>
+        </div>
+        <div id="historyGrid" class="history-grid"></div>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="profileDialog" class="profile-dialog">
+    <button id="closeDialog" class="dialog-close" aria-label="Close">×</button>
+    <div id="profileContent"></div>
+  </dialog>
+
+  <footer>
+    <p>Fan-made interactive archive. Career information changes over time; edit <code>data.js</code> to keep it current.</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
